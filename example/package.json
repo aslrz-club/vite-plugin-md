@@ -11,6 +11,9 @@
     "@yankeeinlondon/code-builder": "^1.0.6",
     "@yankeeinlondon/link-builder": "^1.0.4",
     "@yankeeinlondon/meta-builder": "^1.0.5",
+    "escape-html": "^1.0.3",
+    "markdown-it-container": "^3.0.0",
+    "prismjs": "^1.29.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3"
   },

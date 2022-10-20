@@ -12,6 +12,7 @@ import Pages from 'vite-plugin-pages'
 import Unocss from 'unocss/vite'
 import Vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
+import { containerPlugin } from './src/plugins'
 
 const _dirname = typeof __dirname !== 'undefined'
   ? __dirname
@@ -58,6 +59,9 @@ const config = defineConfig({
       },
       style: {
         baseStyle: 'github',
+      },
+      markdownItSetup(md) {
+        containerPlugin(md)
       },
       builders: [
         meta(),

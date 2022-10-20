@@ -93,6 +93,9 @@ importers:
       '@yankeeinlondon/link-builder': ^1.0.4
       '@yankeeinlondon/meta-builder': ^1.0.5
       cross-env: ^7.0.3
+      escape-html: ^1.0.3
+      markdown-it-container: ^3.0.0
+      prismjs: ^1.29.0
       typescript: ^4.7.4
       unocss: ^0.44.7
       unplugin-auto-import: ^0.10.2
@@ -109,9 +112,12 @@ importers:
     dependencies:
       '@vueuse/core': 8.9.4_vue@3.2.37
       '@vueuse/head': 0.7.7_vue@3.2.37
-      '@yankeeinlondon/code-builder': 1.0.6_meteyzmfeuh3veoq6dmofb6dpy
+      '@yankeeinlondon/code-builder': 1.0.6_c22ifrankaqdkoir4fsb6meeia
       '@yankeeinlondon/link-builder': 1.0.4_b6ielykb63f6nnmy2spbn6lg3y
       '@yankeeinlondon/meta-builder': 1.0.5_i6h53lqfbpbk57ryitagvx5oxi
+      escape-html: 1.0.3
+      markdown-it-container: 3.0.0
+      prismjs: 1.29.0
       vue: 3.2.37
       vue-router: 4.1.3_vue@3.2.37
     devDependencies:
@@ -506,7 +512,7 @@ packages:
     dev: true
 
   /@types/form-data/0.0.33:
-    resolution: {integrity: sha1-yayFsqX9GENbjIXZ7LUObWyJP/g=}
+    resolution: {integrity: sha512-8BSvG1kGm83cyJITQMZSulnl6QV8jqAGreJsc5tPu1Jq0vTSOiY/k24Wx82JRpWwZSqrala6sd5rWi6aNXvqcw==}
     dependencies:
       '@types/node': 16.11.56
 
@@ -1166,6 +1172,33 @@ packages:
       - terser
     dev: false
 
+  /@yankeeinlondon/builder-api/0.4.1_46uzw32fim2jokzouqxygbtrfy:
+    resolution: {integrity: sha512-O6LS9Zg4xqLVpAgea72mNhZvdy9B2BuIgNdsRvNkmnACG8XvlZtEKryGt2ECI/z+dbQICbHDQFCNtZRBrfSMlA==}
+    peerDependencies:
+      fp-ts: ^2.12.1
+      inferred-types: ^0.22.0
+      markdown-it: ^13.0.1
+      vite-plugin-md: '*'
+    dependencies:
+      '@yankeeinlondon/happy-wrapper': 2.6.0_happy-dom@6.0.4
+      fp-ts: 2.12.2
+      inferred-types: 0.22.0
+      markdown-it: 13.0.1
+      vite-plugin-md: 'link:'
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - c8
+      - happy-dom
+      - jsdom
+      - less
+      - sass
+      - stylus
+      - supports-color
+      - terser
+    dev: false
+
   /@yankeeinlondon/builder-api/0.4.1_ovtrftwkcvb7avmgocjaks5tqe:
     resolution: {integrity: sha512-O6LS9Zg4xqLVpAgea72mNhZvdy9B2BuIgNdsRvNkmnACG8XvlZtEKryGt2ECI/z+dbQICbHDQFCNtZRBrfSMlA==}
     peerDependencies:
@@ -1193,25 +1226,25 @@ packages:
       - terser
     dev: false
 
-  /@yankeeinlondon/code-builder/1.0.6_meteyzmfeuh3veoq6dmofb6dpy:
+  /@yankeeinlondon/code-builder/1.0.6_c22ifrankaqdkoir4fsb6meeia:
     resolution: {integrity: sha512-z18bjUtDnhXEBqJfdBFhR3ojqsDkiw7/OOKZBlRe5YGHuSLAihatvHZAXfK1eMb/+8DqbCJQGZTf24+wyDy5GQ==}
     peerDependencies:
+      '@unocss/vite': ^0.44.5
+      '@yankeeinlondon/builder-api': ^0.4.0
       markdown-it: '>=13'
     dependencies:
       '@unocss/vite': 0.44.7_vite@3.0.3
-      '@yankeeinlondon/builder-api': 0.4.0_b6ielykb63f6nnmy2spbn6lg3y
+      '@yankeeinlondon/builder-api': 0.4.1_46uzw32fim2jokzouqxygbtrfy
       '@yankeeinlondon/happy-wrapper': 2.5.0_happy-dom@6.0.4
       inferred-types: 0.22.0
       markdown-it: 13.0.1
       pathe: 0.3.2
-      prismjs: 1.28.0
+      prismjs: 1.29.0
     transitivePeerDependencies:
       - '@edge-runtime/vm'
-      - '@vitejs/plugin-vue'
       - '@vitest/browser'
       - '@vitest/ui'
       - c8
-      - fp-ts
       - happy-dom
       - jsdom
       - less
@@ -1219,9 +1252,6 @@ packages:
       - stylus
       - supports-color
       - terser
-      - vite
-      - vite-plugin-md
-      - vue
     dev: false
 
   /@yankeeinlondon/happy-wrapper/2.5.0_happy-dom@6.0.4:
@@ -1242,6 +1272,26 @@ packages:
       - stylus
       - supports-color
       - terser
+
+  /@yankeeinlondon/happy-wrapper/2.6.0_happy-dom@6.0.4:
+    resolution: {integrity: sha512-az+gEjG4Jl4GbM35ID5pn4v7FwfrgeA1br/B9STXlDLvIsV8q7mCxQ1oYa8bR1iHtNQg7kgW6s9DYheaTemrHQ==}
+    peerDependencies:
+      happy-dom: ^6.0.4
+    dependencies:
+      happy-dom: 6.0.4
+      native-dash: 1.23.2_happy-dom@6.0.4
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - c8
+      - jsdom
+      - less
+      - sass
+      - stylus
+      - supports-color
+      - terser
+    dev: false
 
   /@yankeeinlondon/happy-wrapper/2.6.0_whsrm5m46he4w7q5vfaoc6ftge:
     resolution: {integrity: sha512-az+gEjG4Jl4GbM35ID5pn4v7FwfrgeA1br/B9STXlDLvIsV8q7mCxQ1oYa8bR1iHtNQg7kgW6s9DYheaTemrHQ==}
@@ -2681,6 +2731,10 @@ packages:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
     engines: {node: '>=6'}
 
+  /escape-html/1.0.3:
+    resolution: {integrity: sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==}
+    dev: false
+
   /escape-string-regexp/1.0.5:
     resolution: {integrity: sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==}
     engines: {node: '>=0.8.0'}
@@ -4056,6 +4110,10 @@ packages:
     dependencies:
       semver: 6.3.0
 
+  /markdown-it-container/3.0.0:
+    resolution: {integrity: sha512-y6oKTq4BB9OQuY/KLfk/O3ysFhB3IMYoIWhGJEidXt1NQFocFK2sA2t0NYZAMyMShAGL6x5OPIbrmXPIqaN9rw==}
+    dev: false
+
   /markdown-it/13.0.1:
     resolution: {integrity: sha512-lTlxriVoy2criHP0JKRhO2VDG9c2ypWCsT237eDiLqi09rmbKoUetyGHq2uOIRoRS//kfoJckS0eUzzkDR+k2Q==}
     hasBin: true
@@ -4671,8 +4729,8 @@ packages:
     hasBin: true
     dev: true
 
-  /prismjs/1.28.0:
-    resolution: {integrity: sha512-8aaXdYvl1F7iC7Xm1spqSaY/OJBpYW3v+KJ+F17iYxvdc8sfjW194COK5wVhMZX45tGteiBQgdvD/nhxcRwylw==}
+  /prismjs/1.29.0:
+    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
     engines: {node: '>=6'}
     dev: false
 
